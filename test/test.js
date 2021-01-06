@@ -18,14 +18,14 @@ const wrapper = mount(Card, {
 describe('Card.vue', function () {
 	const licenseInput = wrapper.find('#licensePlate')
 
-	it('Changing license plate input', (done) => {
+	it('Changing license plate input', function (done) {
 		licenseInput.element.value = 'AWE-4122'
 		licenseInput.trigger('input')
 		expect(wrapper.vm.licensePlate).to.equal('AWE-4122')
 		done()
 	})
 
-	it('Changing date input', (done) => {
+	it('Changing date input', function (done) {
 		// Debido a un problema de compatibilidad con el datepicker de vue bootstrap y mocha, se asignara directamente el valor por vm
 		// Due to a compatibility problem with the vue bootstrap datepicker and mocha, the value will be assigned directly by vm
 		wrapper.vm.date = '2021-02-01'
@@ -33,25 +33,25 @@ describe('Card.vue', function () {
 		done()
 	})
 
-	it('Restarting value of the license after testing', (done) => {
+	it('Restarting value of the license after testing', function (done) {
 		restartLicense()
 		expect(wrapper.vm.licensePlate).to.equal('')
 		done()
 	})
 
-	it('Restarting value of the date after testing', (done) => {
+	it('Restarting value of the date after testing', function (done) {
 		restartDate()
 		expect(wrapper.vm.date).to.equal('')
 		done()
 	})
 
-	it('Validate license field on empty submit', (done) => {
+	it('Validate license field on empty submit', function (done) {
 		submitForm()
 		expect(wrapper.vm.isValidLicense).to.equal(false)
 		done()
 	})
 
-	it('Validate date field on empty submit', (done) => {
+	it('Validate date field on empty submit', function (done) {
 		licenseInput.element.value = 'AWE-4122'
 		licenseInput.trigger('input')
 		submitForm()
@@ -60,6 +60,14 @@ describe('Card.vue', function () {
 	})
 
 	checkDateRestriction('AWE-4122')
+
+	setTimeout(() => checkDateRestriction('AWE-4123'), 1000)
+
+	setTimeout(() => checkDateRestriction('AWE-4125'), 2000)
+
+	setTimeout(() => checkDateRestriction('AWE-4127'), 3000)
+
+	setTimeout(() => checkDateRestriction('AWE-4129'), 4000)
 })
 
 // General functions
@@ -79,7 +87,8 @@ function submitForm () {
 function checkDateRestriction (license) {
 	wrapper.vm.licensePlate = license
 	const days = getRestriction()
-	it('Checking restriction on monday', (done) => {
+
+	it('Checking restriction on monday', function (done) {
 		wrapper.vm.date = '2021-01-04'
 		submitForm()
 		console.debug('\tExpected: ', days[1])
@@ -87,7 +96,7 @@ function checkDateRestriction (license) {
 		expect(wrapper.vm.hasRestriction).to.equal(days[1])
 		done()
 	})
-	it('Checking restriction on tuesday', (done) => {
+	it('Checking restriction on tuesday', function (done) {
 		wrapper.vm.date = '2021-01-05'
 		submitForm()
 		console.debug('\tExpected: ', days[2])
@@ -95,7 +104,7 @@ function checkDateRestriction (license) {
 		expect(wrapper.vm.hasRestriction).to.equal(days[2])
 		done()
 	})
-	it('Checking restriction on wednesday', (done) => {
+	it('Checking restriction on wednesday', function (done) {
 		wrapper.vm.date = '2021-01-06'
 		submitForm()
 		console.debug('\tExpected: ', days[3])
@@ -103,7 +112,7 @@ function checkDateRestriction (license) {
 		expect(wrapper.vm.hasRestriction).to.equal(days[3])
 		done()
 	})
-	it('Checking restriction on thursday', (done) => {
+	it('Checking restriction on thursday', function (done) {
 		wrapper.vm.date = '2021-01-07'
 		submitForm()
 		console.debug('\tExpected: ', days[4])
@@ -111,7 +120,7 @@ function checkDateRestriction (license) {
 		expect(wrapper.vm.hasRestriction).to.equal(days[4])
 		done()
 	})
-	it('Checking restriction on friday', (done) => {
+	it('Checking restriction on friday', function (done) {
 		wrapper.vm.date = '2021-01-08'
 		submitForm()
 		console.debug('\tExpected: ', days[5])
@@ -119,7 +128,7 @@ function checkDateRestriction (license) {
 		expect(wrapper.vm.hasRestriction).to.equal(days[5])
 		done()
 	})
-	it('Checking restriction on saturday', (done) => {
+	it('Checking restriction on saturday', function (done) {
 		wrapper.vm.date = '2021-01-09'
 		submitForm()
 		console.debug('\tExpected: ', days[6])
@@ -127,7 +136,7 @@ function checkDateRestriction (license) {
 		expect(wrapper.vm.hasRestriction).to.equal(days[6])
 		done()
 	})
-	it('Checking restriction on sunday', (done) => {
+	it('Checking restriction on sunday', function (done) {
 		wrapper.vm.date = '2021-01-03'
 		submitForm()
 		console.debug('\tExpected: ', days[0])
