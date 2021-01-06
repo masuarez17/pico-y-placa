@@ -11,6 +11,7 @@ export default {
 	invalidLicense: 'Ingrese la placa del vehiculo correctamente',
 	invalidDate: 'Seleccione una fecha para continuar',
 	required: 'Ingrese los datos del campo obligatorio',
+	weekends: 'No hay restricciones los fines de semana',
 	calendar: {
 		labelPrevDecade: 'Década anterior',
 		labelPrevYear: 'Año anterior',

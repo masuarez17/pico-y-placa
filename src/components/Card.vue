@@ -19,6 +19,7 @@
 						<form>
 							<b-form-input
 								v-model="licensePlate"
+								id="licensePlate"
 								class="form-control mt-4 text-monospace text-center"
 								v-maska="'AAA-####'"
 								:state="isValidLicense"
@@ -27,6 +28,7 @@
 							/>
 							<b-form-datepicker
 								v-model="date"
+								id="date"
 								v-bind="languageText.calendar"
 								:locale="languageText.languageCalendar"
 								menu-class="w-100"
@@ -35,9 +37,8 @@
 								class="mt-3 text-monospace text-center"
 								size="sm"
 								required
-								@blur="validateDate"
 							/>
-							<button type="button" class="form-control btn btn-outline-primary mt-3" @click="check">{{ languageText.submitButton }}</button>
+							<button id="submit" type="button" class="form-control btn btn-outline-primary mt-3" @click="check">{{ languageText.submitButton }}</button>
 						</form>
 					</form>
 				</div>
@@ -62,7 +63,8 @@ export default {
 			licensePlate: '',
 			date: '',
 			isValidLicense: null,
-			isValidDate: null
+			isValidDate: null,
+			hasRestriction: false
 		}
 	},
 	computed: {
@@ -85,7 +87,6 @@ export default {
 			return false
 		},
 		validateLicense () {
-			console.log('validateLicense')
 			this.isValidLicense = null
 			if (!this.licensePlate) {
 				this.isValidLicense = false
@@ -100,7 +101,6 @@ export default {
 			return true
 		},
 		validateDate () {
-			console.log('VALIDATING DATE')
 			this.isValidDate = null
 			if (!this.date) {
 				this.isValidDate = false
@@ -126,20 +126,23 @@ export default {
 		},
 		check () {
 			if (!this.validateForm()) {
-				console.log('Complete el formulario')
 				return
 			}
+			console.log(this.date)
 			const date = new Date(this.date)
 			date.setDate(date.getDate() + 1)
 			const invalidDigits = this.getInvalidDigits(date.getDay())
 			if (invalidDigits !== false) {
 				if (invalidDigits.includes(this.licensePlate.charAt(7))) {
 					this.$bvModal.msgBoxOk(this.languageText.cantDriveMessage)
+					this.hasRestriction = true
 				} else {
 					this.$bvModal.msgBoxOk(this.languageText.canDriveMessage)
+					this.hasRestriction = false
 				}
 			} else {
-				this.$bvModal.msgBoxOk('There are no restrictions on weekends')
+				this.$bvModal.msgBoxOk(this.languageText.weekends)
+				this.hasRestriction = false
 			}
 		}
 	}

@@ -11,5 +11,6 @@ export default {
 	invalidLicense: 'Enter the license plate correctly',
 	invalidDate: 'Select a date to continue',
 	required: 'Enter the required field data',
+	weekends: 'There are no restrictions on weekends',
 	calendar: {}
 }
