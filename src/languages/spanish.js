@@ -8,6 +8,9 @@ export default {
 	flagDirection: '../assets/spanish.png',
 	canDriveMessage: 'Puedes manejar ese dia sin restricciones',
 	cantDriveMessage: 'No puedes manejar  desde las 7:00 a las 9:30 am ni de las 4:00 a las 7:30 pm',
+	invalidLicense: 'Ingrese la placa del vehiculo correctamente',
+	invalidDate: 'Seleccione una fecha para continuar',
+	required: 'Ingrese los datos del campo obligatorio',
 	calendar: {
 		labelPrevDecade: 'Década anterior',
 		labelPrevYear: 'Año anterior',
