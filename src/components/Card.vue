@@ -1,7 +1,7 @@
 <template>
-	<div class="container-fluid background mt-5 flex-fill">
+	<div class="container-fluid mt-5 flex-fill">
 		<div class="row justify-content-center">
-			<div class="card max-vw-50 shadow p-4">
+			<div class="card max-vw-50 shadow-lg border border-3 border-dark rounded-sm p-4">
 				<div class="container mb-3">
 					<div class="row justify-content-start" @click="changeLanguage">
 						<div class="col-2 col-sm-2 col-xs-12 justify-content-start">
@@ -15,7 +15,7 @@
 				</div>
 				<div class="card-body mt-n3">
 					<form>
-						<h1>Pico y placa </h1>
+						<h1><strong>Pico y Placa</strong></h1>
 						<p class="text-muted mt-5">{{ languageText.explanation }}</p>
 						<form>
 							<b-form-input
@@ -39,7 +39,7 @@
 								size="sm"
 								required
 							/>
-							<button id="submit" type="button" class="form-control btn btn-outline-primary mt-3" @click="check">{{ languageText.submitButton }}</button>
+							<button id="submit" type="button" class="form-control btn btn-outline-primary my-4" @click="check">{{ languageText.submitButton }}</button>
 						</form>
 					</form>
 				</div>
@@ -151,9 +151,6 @@ export default {
 </script>
 
 <style>
-.background {
-	background-color: lightgrey;
-}
 .esflag {
 	width: 6vh;
 	height: auto;
