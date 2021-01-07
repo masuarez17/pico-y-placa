@@ -2,19 +2,20 @@
 	<div class="container-fluid background mt-5 flex-fill">
 		<div class="row justify-content-center">
 			<div class="card max-vw-50 shadow p-4">
-				<div class="container">
+				<div class="container mb-3">
 					<div class="row justify-content-start" @click="changeLanguage">
-						<div class="col-2 col-sm-4 col-xs-12">
+						<div class="col-2 col-sm-2 col-xs-12 justify-content-start">
 							<br/>
 							<img v-if="language === 'spanish'" class="esflag" alt="Flag" src="../assets/spanish.png">
 							<img v-else alt="Flag" class="enflag" src="../assets/english.png">
 							<span class="text-align-centertext-muted mt-4 d-inline">{{ languageText.languageName }}</span>
 						</div>
+						<div class="col-12"></div>
 					</div>
 				</div>
 				<div class="card-body mt-n3">
 					<form>
-						<h1>Pico y placa</h1>
+						<h1>Pico y placa </h1>
 						<p class="text-muted mt-5">{{ languageText.explanation }}</p>
 						<form>
 							<b-form-input
@@ -160,5 +161,8 @@ export default {
 .enflag {
 	width: 5vh;
 	height: auto;
+}
+.licenseplate {
+	height: 10vh;
 }
 </style>
